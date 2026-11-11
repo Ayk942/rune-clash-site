@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rune Clash</title>
+<meta name="description" content="Rune Clash, jeu de combat 3D gratuit : 99 héros, six éléments, des duels en temps réel sur navigateur, téléphone et PC. Aucun achat en argent réel.">
+<meta name="theme-color" content="#0b0820">
+<meta property="og:title" content="Rune Clash">
+<meta property="og:description" content="Jeu de combat 3D gratuit : 99 héros, six éléments, des duels en temps réel.">
+<meta property="og:image" content="img/partage.jpg">
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Saira+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<a class="saut" href="#heros">Aller aux héros</a>
+
+<!-- ===== Barre du haut (toujours visible) ===== -->
+<header class="barre" id="barre">
+  <a class="marque" href="#accueil" aria-label="Rune Clash, retour en haut"><span class="marque-rune" data-rune="prisme"></span><span>Rune Clash</span></a>
+  <nav class="menu" id="menu" aria-label="Rubriques">
+    <a href="#univers">Univers</a>
+    <a href="#combat">Combat</a>
+    <a href="#heros">Les 99 héros</a>
+    <a href="#fondateur">Fondateur</a>
+    <a href="#mises-a-jour">Mises à jour</a>
+  </nav>
+  <a class="btn btn-or btn-petit" data-lien="jouer" href="#">Jouer</a>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><i></i><i></i></button>
+</header>
+
+<main>
+  <!-- ===== Accueil : la scène 3D du jeu ===== -->
+  <section class="accueil" id="accueil" aria-label="Accueil">
+    <div class="scene" id="scene-accueil">
+      <img class="scene-secours" src="img/accueil.jpg" alt="Un héros de Rune Clash sur la planète-désert, sous la lune" hidden>
+      <div class="scene-charge" id="charge-accueil" role="status"><span class="anneau"></span><span id="charge-txt">Les héros arrivent…</span></div>
+    </div>
+    <div class="accueil-voile" aria-hidden="true"></div>
+
+    <div class="accueil-texte">
+      <p class="accroche" data-texte="accroche"></p>
+      <h1 class="titre"><span>Rune</span> <span>Clash</span></h1>
+      <p class="intro" data-texte="intro"></p>
+      <div class="actions">
+        <a class="btn btn-or btn-grand" data-lien="jouer" href="#"><span data-texte-lien="jouer">Jouer maintenant</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></a>
+        <a class="btn btn-ligne btn-grand" data-lien="telecharger" href="#"><span data-texte-lien="telecharger">Installer l'appli</span></a>
+      </div>
+      <p class="supports" data-texte="supports"></p>
+    </div>
+
+    <div class="vedette" id="vedette" aria-live="polite">
+      <button class="rond" id="ved-prec" aria-label="Héros précédent"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <a class="vedette-info" id="ved-info" href="#heros">
+        <span class="vedette-rune" id="ved-rune"></span>
+        <span><b id="ved-nom">…</b><small id="ved-espece"></small></span>
+      </a>
+      <button class="rond" id="ved-suiv" aria-label="Héros suivant"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="scene-outils" id="outils-accueil">
+      <span class="aide3d">Glisse pour tourner · touche pour une attaque</span>
+      <button class="rond" data-zoom="-1" aria-label="Rapprocher"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></svg></button>
+      <button class="rond" data-zoom="1" aria-label="Éloigner"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></button>
+    </div>
+  </section>
+
+  <!-- ===== Chiffres clés ===== -->
+  <section class="chiffres" aria-label="Rune Clash en chiffres"><ul id="chiffres"></ul></section>
+
+  <!-- ===== Univers ===== -->
+  <section class="bloc" id="univers">
+    <div class="enveloppe univers">
+      <div>
+        <p class="etiquette"><span data-rune="prisme"></span>Univers</p>
+        <h2 id="lore-titre"></h2>
+        <div class="lore" id="lore"></div>
+      </div>
+      <ol class="regions" id="regions" aria-label="Les régions"></ol>
+    </div>
+  </section>
+
+  <!-- ===== Combat, éléments, modes ===== -->
+  <section class="bloc bloc-sombre" id="combat">
+    <div class="enveloppe">
+      <p class="etiquette"><span data-rune="feu"></span>Combat</p>
+      <h2>Un duel se gagne avec les doigts</h2>
+      <ol class="combat" id="combat-liste"></ol>
+
+      <div class="elements">
+        <h3>Six éléments, six effets</h3>
+        <ul id="elements"></ul>
+      </div>
+
+      <div class="modes">
+        <h3>Douze façons de jouer</h3>
+        <ul id="modes"></ul>
+        <p class="progression" id="progression"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Les 99 héros ===== -->
+  <section class="bloc" id="heros">
+    <div class="enveloppe">
+      <div class="heros-tete">
+        <div>
+          <p class="etiquette"><span data-rune="ombre"></span>Collection</p>
+          <h2>Les <span id="nb-heros">99</span> héros</h2>
+          <p class="chapo">Chaque héros a son espèce, ses quatre techniques, son ultime et son histoire. Touche une carte pour le voir en 3D.</p>
+        </div>
+      </div>
+
+      <div class="filtres" id="filtres" role="search">
+        <label class="recherche" for="cherche"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="cherche" type="search" placeholder="Nom, espèce ou titre" autocomplete="off"></label>
+        <div class="puces" id="f-element" aria-label="Élément"></div>
+        <div class="puces" id="f-role" aria-label="Rôle"></div>
+        <div class="puces" id="f-rarete" aria-label="Rareté"></div>
+        <label class="tri" for="f-tri">Trier
+          <select id="f-tri">
+            <option value="rarete">par rareté</option>
+            <option value="puissance">par puissance</option>
+            <option value="nom">par nom</option>
+            <option value="element">par élément</option>
+          </select>
+        </label>
+      </div>
+      <p class="compte" id="compte" role="status"></p>
+      <ul class="grille" id="grille"></ul>
+      <button class="btn btn-ligne voir-tout" id="voir-tout" hidden>Voir tous les héros</button>
+    </div>
+  </section>
+
+  <!-- ===== Fondateur ===== -->
+  <section class="bloc bloc-sombre" id="fondateur">
+    <div class="enveloppe fondateur">
+      <div>
+        <p class="etiquette"><span data-rune="terre"></span>Fondateur</p>
+        <blockquote class="citation" id="citation"></blockquote>
+        <p class="signature" id="signature"></p>
+        <div class="fondateur-texte" id="fondateur-texte"></div>
+      </div>
+      <div>
+        <h3>Les grandes étapes</h3>
+        <ol class="etapes" id="etapes"></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Mises à jour et communauté ===== -->
+  <section class="bloc" id="mises-a-jour">
+    <div class="enveloppe majs">
+      <div>
+        <p class="etiquette"><span data-rune="foudre"></span>Mises à jour</p>
+        <h2>Journal des versions</h2>
+        <div class="journal" id="journal"></div>
+      </div>
+      <aside class="communaute" aria-labelledby="com-titre">
+        <h3 id="com-titre">Communauté</h3>
+        <ul class="reseaux" id="reseaux"></ul>
+        <p class="com-jeu">Dans le jeu : ajoute des amis avec leur code, rejoins un club, grimpe au classement et retrouve le tournoi chaque week-end.</p>
+        <p class="com-jeu">Un bug ? Dans le jeu : <b>Paramètres</b>, puis <b>Signaler un bug</b>.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===== Dernier appel ===== -->
+  <section class="final" aria-label="Jouer">
+    <div class="enveloppe">
+      <p class="final-titre">Ta rune t'attend.</p>
+      <a class="btn btn-or btn-grand" data-lien="jouer" href="#"><span data-texte-lien="jouer">Jouer maintenant</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></a>
+      <p class="supports" data-texte="supports"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="enveloppe pied-grille">
+    <a class="marque" href="#accueil"><span class="marque-rune" data-rune="prisme"></span><span>Rune Clash</span></a>
+    <nav aria-label="Plan du site"><a href="#univers">Univers</a><a href="#combat">Combat</a><a href="#heros">Héros</a><a href="#fondateur">Fondateur</a><a href="#mises-a-jour">Mises à jour</a></nav>
+    <p>Jeu gratuit. Aucun achat en argent réel : tout s'obtient en jouant.<br>Corps 3D de base : modèles VRoid libres de droits (CC0). Personnages, univers et règles : Rune Clash.</p>
+    <p id="contact"></p>
+    <p class="pied-version">© <span id="annee">2026</span> Rune Clash · site v1 · jeu <span id="version-jeu"></span></p>
+  </div>
+</footer>
+
+<!-- ===== Fiche d'un héros ===== -->
+<dialog class="fiche" id="fiche" aria-labelledby="fiche-nom">
+  <div class="fiche-scene" id="scene-fiche">
+    <img class="fiche-secours" id="fiche-img" alt="" hidden>
+    <div class="scene-charge" id="charge-fiche" role="status"><span class="anneau"></span><span>Chargement…</span></div>
+    <div class="scene-outils">
+      <span class="aide3d">Glisse pour tourner · molette ou pincement pour zoomer</span>
+      <button class="rond" data-zoom="-1" aria-label="Rapprocher"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></svg></button>
+      <button class="rond" data-zoom="1" aria-label="Éloigner"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></button>
+      <button class="rond" data-recentrer aria-label="Revenir à la vue de départ"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/></svg></button>
+    </div>
+  </div>
+  <div class="fiche-info" id="fiche-info"></div>
+  <div class="fiche-nav">
+    <button class="rond" id="fiche-prec" aria-label="Héros précédent"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="rond" id="fiche-suiv" aria-label="Héros suivant"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    <button class="rond fermer" id="fiche-fermer" aria-label="Fermer la fiche"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+</dialog>
+
+<!-- ===== Installer l'appli ===== -->
+<dialog class="installer" id="installer" aria-labelledby="inst-titre">
+  <h2 id="inst-titre">Installer Rune Clash</h2>
+  <p>Le jeu s'installe directement depuis le navigateur, comme une appli. Pas de magasin, pas de compte à créer pour commencer.</p>
+  <ol>
+    <li><b>Android (Chrome)</b><span>Ouvre le jeu, touche le menu ⋮ puis « Installer l'application ».</span></li>
+    <li><b>iPhone et iPad (Safari)</b><span>Ouvre le jeu, touche Partager puis « Sur l'écran d'accueil ».</span></li>
+    <li><b>PC (Chrome ou Edge)</b><span>Ouvre le jeu, puis clique sur l'icône d'installation à droite de la barre d'adresse.</span></li>
+  </ol>
+  <div class="actions">
+    <a class="btn btn-or" data-lien="jouer" href="#">Ouvrir le jeu</a>
+    <button class="btn btn-ligne" id="inst-fermer">Fermer</button>
+  </div>
+</dialog>
+
+<script defer src="js/config.js"></script>
+<script defer src="js/contenu.js"></script>
+<script defer src="js/moteur-3d.js"></script>
+<script defer src="js/scene-3d.js"></script>
+<script defer src="js/site.js"></script>
+</body>
+</html>
